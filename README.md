@@ -60,6 +60,9 @@ alembic upgrade head
 
 Full reference (arguments, examples, error cases) lives in [`docs/`](./docs/README.md):
 - [`docs/auth.md`](./docs/auth.md) - register, login, current user
+- [`docs/restaurants.md`](./docs/restaurants.md) - apply, approve/reject, public directory
+- [`docs/listings.md`](./docs/listings.md) - public browse, owner CRUD
+- [`docs/orders.md`](./docs/orders.md) - place an order, fulfillment status
 - [`docs/payments.md`](./docs/payments.md) - Stripe checkout, webhook, payment history
 
 FastAPI also serves interactive docs at `/docs` (Swagger UI) whenever the server is running.

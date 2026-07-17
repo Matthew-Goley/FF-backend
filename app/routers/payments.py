@@ -84,6 +84,8 @@ async def stripe_webhook(request: Request, db: Session = Depends(get_db)):
         if payment:
             payment.status = "succeeded"
             payment.stripe_payment_intent_id = data.get("payment_intent")
+            if payment.order and payment.order.status == "pending_payment":
+                payment.order.status = "paid"
             db.commit()
 
     elif event_type in ("checkout.session.expired", "checkout.session.async_payment_failed"):
@@ -92,6 +94,9 @@ async def stripe_webhook(request: Request, db: Session = Depends(get_db)):
         )
         if payment:
             payment.status = "failed"
+            if payment.order and payment.order.status == "pending_payment":
+                payment.order.status = "payment_failed"
+                payment.order.listing.quantity_available += payment.order.quantity
             db.commit()
 
     return {"received": True}
