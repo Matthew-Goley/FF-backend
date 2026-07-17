@@ -30,7 +30,7 @@ await fetch("http://localhost:8000/auth/register", {
 
 **Response** `201 Created`:
 ```json
-{ "id": 1, "username": "matt", "email": "matt@example.com", "created_at": "2026-07-16T19:34:28Z" }
+{ "id": 1, "username": "matt", "email": "matt@example.com", "account_type": "customer", "created_at": "2026-07-16T19:34:28Z" }
 ```
 
 **Errors**
@@ -98,7 +98,7 @@ await fetch("http://localhost:8000/auth/me", {
 
 **Response** `200 OK`:
 ```json
-{ "id": 1, "username": "matt", "email": "matt@example.com", "created_at": "2026-07-16T19:34:28Z" }
+{ "id": 1, "username": "matt", "email": "matt@example.com", "account_type": "customer", "created_at": "2026-07-16T19:34:28Z" }
 ```
 
 **Errors**
@@ -108,3 +108,11 @@ await fetch("http://localhost:8000/auth/me", {
 
 Useful for checking "is this user still logged in" on app load - if it 401s, drop the stored
 token and send them back to login.
+
+## `account_type`
+
+Every user starts as `"customer"`. It flips to `"restaurant"` automatically the first time they
+call `POST /restaurants/apply` (see [`restaurants.md`](./restaurants.md)) - there's no separate
+"sign up as a restaurant" flow, and no field for it on `POST /auth/register`. There's also a
+separate `is_admin` flag (not exposed on `UserOut`) that gates restaurant approval/rejection -
+there's no self-serve way to become an admin yet, it's a manual DB update.

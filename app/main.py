@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.config import settings
-from app.routers import auth, payments
+from app.routers import auth, listings, orders, payments, restaurants
 
 app = FastAPI(title="FreshForward API")
 
@@ -16,6 +16,9 @@ app.add_middleware(
 
 app.include_router(auth.router)
 app.include_router(payments.router)
+app.include_router(restaurants.router)
+app.include_router(listings.router)
+app.include_router(orders.router)
 
 
 @app.get("/")

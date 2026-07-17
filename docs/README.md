@@ -3,6 +3,9 @@
 Reference for calling the backend from the frontend (or curl/Postman). One page per domain:
 
 - [`auth.md`](./auth.md) - register, login, current user
+- [`restaurants.md`](./restaurants.md) - apply, approve/reject, public directory
+- [`listings.md`](./listings.md) - public browse, owner CRUD
+- [`orders.md`](./orders.md) - place an order, fulfillment status
 - [`payments.md`](./payments.md) - Stripe checkout, webhook, payment history
 
 FastAPI also serves interactive, always-up-to-date docs at `/docs` (Swagger UI) and `/redoc`
